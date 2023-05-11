@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="Cals.css">
+    <title>Calculator</title>
+    <script>
+      function calculate() {
+        var a = document.getElementById("num1").value;
+        var b = document.getElementById("num2").value;
+        var op = document.getElementById("operator").value;
+        var result = document.getElementById("result");
+
+        if (isNaN(a) || isNaN(b)) {
+          result.value = "Please enter valid numbers for a and b";
+        } else {
+          a = parseFloat(a);
+          b = parseFloat(b);
+          switch (op) {
+            case "+":
+              result.value = a + b;
+              break;
+            case "-":
+              result.value = a - b;
+              break;
+            case "*":
+              result.value = a * b;
+              break;
+            case "/":
+              if (b === 0) {
+                result.value = "Please enter a non-zero value for B";
+              } else {
+                result.value = a / b;
+              }
+              break;
+          }
+        }
+      }
+
+      function reset() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").value = "";
+      }
+
+      function updateOperator(op) {
+        document.getElementById("operator").value = op;
+        calculate();
+      }
+      function exit() {
+        document.getElementById("model").style.display = "block";
+      }
+
+      function sure() {
+        document.getElementById("model").style.display = "none";
+        window.close();
+      }
+
+      function no() {
+        document.getElementById("model").style.display = "none";
+      }
+
+    </script>
+  </head>
+  <body>
+  
+    <div id="main">
+      <div id="head">
+        <div class="input">
+          <label>Enter A:</label>
+          <input type="text" name="" placeholder="Enter number" id="num1"><br>
+          <label>Enter B:</label>
+          <input type="text" name="" placeholder="Enter number" id="num2"><br>
+        </div>
+        <div id="button">
+          <button class="btn" onclick="updateOperator('/')">:</button>
+          <button class="btn" onclick="updateOperator('*')">x</button>
+          <button class="btn" onclick="updateOperator('-')">-</button>
+          <button class="btn" onclick="updateOperator('+')">+</button><br>
+        </div>
+        <div id="aaa">
+          <label>Result:</label>
+          <input type="text" class="result" disabled id="result">
+          <div id="end">
+            <button onclick="reset()" class="reset">Reset</button>
+            <button onclick="exit()" class="exit">Exit</button><br>
+          </div>
+        </div>
+        <input type="hidden" id="operator">
+      </div>
+    </div>
+    <div id="model">
+      <div class="contain">
+        <h2 class="hd">YOU WANT TO CLOSE THE CALS ?</h2>
+        <div class="last">
+          <button onclick="sure()" class="sure">SURE</button>
+          <button onclick="no()" class="no">NO</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
