@@ -1,26 +1,7 @@
-package jdice;
+package JDice;
 
 import java.util.*;
-/*
-JDice: Java Dice Rolling Program
-Copyright (C) 2006 Andrew D. Hilton  (adhilton@cis.upenn.edu)
 
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
- */
 
 public class DiceParser{
     /* this is a helper class to manage the input "stream"*/
@@ -107,19 +88,6 @@ public class DiceParser{
 	}
 
     }
-    /** roll::= ndice ; roll
-              | ndice
-        xdice::= dice
-                | N X dice
-        dice::= die bonus?  dtail
-              XXXX| FA(die,bonus,N) dtail
-         dtail::= & dice 
-                | <nothing>
-         die::= (N)? dN
-         bonus::= + N
-                | -N
-    **/
-
     public static Vector<DieRoll> parseRoll(String s){
 	StringStream ss=new StringStream(s.toLowerCase());
 	Vector<DieRoll> v= parseRollInner(ss,new Vector<DieRoll>());
@@ -165,20 +133,17 @@ public class DiceParser{
 	}
 	return ans;
     }
-    /**
-     * dice::= die (bonus?) dtail
-     *       XXXX| FA(die,bonus,N) dtail
-     */
+       
     private static DieRoll parseDice(StringStream ss){
 	return parseDTail(parseDiceInner(ss),ss);
     }
     private static DieRoll parseDiceInner(StringStream ss){
-	/*if(checkAndEat("FA(")) {
+	if(checkAndEat("FA(")) {
 	    DieRoll d=parseFA(ss);
 	    if(d==null)
 		return null;
 	    return parseDTail(d,ss);
-	    }*/
+	}
 	Integer num=ss.getInt();
 	int dsides;
 	int ndice;
@@ -208,7 +173,15 @@ public class DiceParser{
 			   bonus);	
 	
     }
-    private static DieRoll parseDTail(DieRoll r1,
+    private static DieRoll parseFA(StringStream ss) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private static boolean checkAndEat(String string) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	private static DieRoll parseDTail(DieRoll r1,
 				StringStream ss) {
 	if(r1==null)
 	    return null;
@@ -243,9 +216,10 @@ public class DiceParser{
 	test("12d10+5 & 4d6+2");
 	test("d6 ; 2d4+3");
 	test("4d6+3 ; 8d12 -15 ; 9d10 & 3d6 & 4d12 +17");
-        test("4d6 + xyzzy");
+    test("4d6 + xyzzy");
 	test("hi");
 	test("4d4d4");
     }
 
 }
+
