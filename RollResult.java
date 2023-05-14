@@ -1,5 +1,3 @@
-package JDice;
-
 import java.util.*;
 
 public class RollResult { //change "publicclass Roll Result" to "public class RollResult"
